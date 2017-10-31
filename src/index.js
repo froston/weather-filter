@@ -1,28 +1,24 @@
-var snmp = require('snmp-native')
-var util = require('util')
 var colors = require('colors/safe');
+var functions = require('./funcitons')
 
-// setup
-var host = '213.155.225.213'
-var port = 161
-var community = 'public'
-var oid = [0, 1, 3, 6, 1, 4, 1, 21287, 16, 3, 0]
-
-var session = new snmp.Session({ 
-  host: host,
-  port: port,
-  community: community, 
-  // version: snmp.Versions.SNMPv1 
-})
-
-// simple get request.
-console.log(colors.cyan("Trying to get variables ..."))
-session.get({ oid: oid }, function (err, varbinds) {
-  if (err) {
-    console.log(colors.red(err))
-  } else {
-    var vb = varbinds[0]
-    console.log(colors.green('The system description is "' + vb.value + '"'))
-  }
-  session.close()
-});
+try {
+  var deviceStatus = 0;
+  functions.getDeviceStatus(function (status) {
+    console.log(status ? colors.green("The device is ON") : colors.yellow("The device is OFF"))
+    deviceStatus = status;
+    // manage device
+    if (deviceStatus != null) {
+      if (deviceStatus == 0) {
+        /* functions.setDeviceStatus("1", function() {
+          console.log("Device is set ON!")
+        }) */
+      } else {
+        /* functions.setDeviceStatus("0", function() {
+          console.log("Device is set OFF!")
+        }) */
+      }
+    }
+  })
+} catch(Exception) {
+  console.log(colors.red("error", Exception))
+}

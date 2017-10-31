@@ -10,9 +10,8 @@
   "author": "Pavel Muller",
   "license": "ISC",
   "dependencies": {
-    "colors": "^1.1.2",
-    "snmp-native": "^1.1.1",
-    "util": "^0.10.3",
-    "webpack": "^3.8.1"
+    "colors": "1.1.2",
+    "snmp-native": "1.1.1",
+    "util": "0.10.3"
   }
 }
