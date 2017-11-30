@@ -14,15 +14,13 @@ try {
         helpers.getAirQuality((airQuality) => {
           console.log(`Air Quality: ${airQuality}`)
           if (airQuality >= settings.maxValue && deviceStatus == 0) {
-            console.log(colors.magenta("Device was set ON!"))
-            /* helpers.setDeviceStatus("1", function() {
+            helpers.setDeviceStatus("1", () => {
               console.log("Device is set ON!")
-            }) */
+            })
           } else if (airQuality < settings.maxValue && deviceStatus == 1) {
-            console.log(colors.magenta("Device was set OFF!"))
-            /* helpers.setDeviceStatus("0", function() {
+            helpers.setDeviceStatus("0", () => {
               console.log("Device is set OFF!")
-            }) */
+            })
           } else {
             console.log(colors.magenta(deviceStatus === 1 ? "Device keeps ON" : "Device keeps OFF"))
           }

@@ -8,7 +8,6 @@ const config = require('./config');
 // GET DEVICE VALUE
 getDeviceStatus = (callback) => {
   console.log(colors.cyan("Trying to get value ..."))
-
   const session = new snmp.Session({ 
     host: config.host,
     port: config.port,
@@ -38,15 +37,18 @@ setDeviceStatus = (value, callback) => {
     community: config.writeCommunity, 
     version: snmp.Versions.SNMPv1 
   })
-
-  session.set({ oid: config.oid, value: value, type: 4 }, (err, varbinds) => {
+  console.log(colors.magenta(value ? "Device was SUPPOSED TO set ON" : "Device was SUPPOSED TO set OFF"))
+  callback(1)
+  // TODO: dont allow setting for now
+  /* session.set({ oid: config.oid, value: value, type: 4 }, (err, varbinds) => {
     if (err) {
       console.log(colors.red(err))
     } else {
+      console.log(colors.magenta("Device was set " + value ? "ON" : "OFF"))
       callback()
     }
     session.close()
-  });
+  }); */
 }
 
 _downloadFile = (url, callback) => {
