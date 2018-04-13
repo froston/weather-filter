@@ -2,31 +2,20 @@ var webpack = require('webpack')
 var path = require('path')
 
 var buildDir = path.resolve(__dirname, './build')
-var appDir = path.resolve(__dirname, './src')
+var appDir = path.resolve(__dirname, './src/server')
 
 var config = {
-  devtool: false,
-  bail: true,
-  entry: appDir + '/index.js',
+  target: 'node',
+  entry: appDir + '/server.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'server.js',
     path: buildDir,
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: `'production'`,
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        comparisons: false,
-      },
-      output: {
-        comments: false,
-        ascii_only: true,
-      },
     }),
     new webpack.NoEmitOnErrorsPlugin()
   ],
