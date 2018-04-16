@@ -12,6 +12,8 @@ export default ({ body }) => {
           You need to enable JavaScript to run this app.
         </noscript>
         <div id="root">${body}</div>
+        <script type="text/javascript" src="/client.js"></script>
+      </body>
     </html>
   `;
 };

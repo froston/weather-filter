@@ -5,7 +5,7 @@ import { RaisedButton } from 'material-ui';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 import Toggle from 'material-ui/Toggle';
 
-class WeatherControl extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -101,4 +101,4 @@ class WeatherControl extends React.Component {
   }
 }
 
-export default WeatherControl
+export default App

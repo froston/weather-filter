@@ -1,4 +1,3 @@
-// server/app.js
 import express from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
@@ -14,12 +13,12 @@ app.use('/', express.static('build'));
 
 app.get('/', (req, res) => {
   helpers.getData((data) => {
-    var body = renderToString(<App data={data} />);
+    var body = renderToString(<App />)
     res.send(template({ body: body }));
   })
 });
 
-/* app.use(express.json())
+app.use(express.json())
 
 app.get('/device-status', function (req, res) {
   helpers.getDeviceStatus((status) => {
@@ -52,7 +51,7 @@ app.post('/autofilter', function (req, res) {
     res.json({ autoFilter })
   })
 })
- */
+
 // Run server
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`)

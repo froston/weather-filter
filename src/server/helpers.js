@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import path from "path";
 import { writeFile } from "fs";
 import { Session, Versions } from "snmp-native";
 import { get } from "http";
@@ -6,6 +6,7 @@ import util from "util";
 import { cyan, red, magenta } from "colors/safe";
 import { Parser } from "xml2js";
 import { host as _host, port as _port, readCommunity, oid as _oid, writeCommunity, xmlUrl, stationCode, airQuality } from "./config";
+import settings from './settings.json'
 
 // GET DEVICE VALUE
 function getDeviceStatus(callback) {
@@ -123,21 +124,14 @@ function getAirQuality(callback) {
 }
 
 function getAutofilter(callback) {
-  var fileName = resolve(__dirname, './settings.json')
-  var file = require(fileName)
-
-  callback(file.autoFilter)
+  callback(settings.autoFilter)
 }
 
 function setAutofilter(val, callback) {
-  var fileName = resolve(__dirname, './settings.json')
-  var file = require(fileName)
-
-  file.autoFilter = val
-
-  writeFile(fileName, JSON.stringify(file, null, 2), function (err) {
+  settings.autoFilter = val
+  writeFile('build/settings.json', JSON.stringify(settings, null, 2), function (err) {
     if (err) throw err
-    callback(file.autoFilter)
+    callback(settings.autoFilter)
   });
 }
 
