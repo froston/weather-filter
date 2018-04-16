@@ -12,10 +12,8 @@ var app = express()
 app.use('/', express.static('build'));
 
 app.get('/', (req, res) => {
-  helpers.getData((data) => {
-    var body = renderToString(<App />)
-    res.send(template({ body: body }));
-  })
+  var body = renderToString(<App data={{}} />)
+  res.send(template({ body: body }));
 });
 
 app.use(express.json())
